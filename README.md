@@ -4,7 +4,7 @@ This is a typical create-react-app
 
 We want you to use the src/movies.js file and build a UI consuming this information on the front end.
 
-Expectations:
+### Expectations:
 
 Output title, category, image, likes and dislikes.
 
@@ -16,7 +16,7 @@ Be as minimal or creative as you want on the
 
 front end, flex your UI muscles if need be.
 
-Bonus:
+### Bonus:
 
 Use Context API.
 
