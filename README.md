@@ -5,12 +5,15 @@ This is a typical create-react-app
 We want you to use the src/movies.js file and build a UI consuming this information on the front end.
 
 Expectations:
+Output title, category, image, likes and dislikes.
+Increment likes and dislikes via buttons.
 Use Hooks.
 Be as minimal or creative as you want on the
 front end, flex your UI muscles if need be.
 
 Bonus:
 Use Context API.
+Create filter for title.
 
 ## create-react-app documentation
 
