@@ -2,12 +2,77 @@ import React, { useContext, useState } from "react";
 import ThumbsUp from "../static/media/thumbs-up";
 import ThumbsDown from "../static/media/thumbs-down";
 
-const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
+const MovieCard = ({
+  id,
+  title,
+  category,
+  url,
+  likes,
+  dislikes,
+  rateMovie,
+}) => {
   const [thumbsDownHover, setThumbsDownHover] = useState(false);
   const [thumbsUpHover, setThumbsUpHover] = useState(false);
+  const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
+  const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
 
   const handleRatingClick = (type, id) => {
-    console.log(type, id);
+    // detect if already button clicked to limit rating spam.
+    let direction = "add";
+    if (
+      (type === "up" && thumbsUpClicked) ||
+      (type === "down" && thumbsDownClicked)
+    ) {
+      direction = "subtract";
+    }
+    // toggle button click state
+    if (type === "up") {
+      setThumbsUpClicked(!thumbsUpClicked);
+    }
+    if (type === "down") {
+      setThumbsDownClicked(!thumbsDownClicked);
+    }
+
+    rateMovie(type, direction, id);
+  };
+
+  const iconColor = (type) => {
+    const unclicked = "rgba(29, 140, 248, 1)";
+    const unclickedHover = "rgba(29, 140, 248, 0.5)";
+    const clicked = "rgba(250, 200, 10, 1)";
+    const clickedHover = "rgba(250, 200, 10, 0.5)";
+
+    if (type === "up" && !thumbsUpClicked && !thumbsUpHover) {
+      return unclicked;
+    }
+
+    if (type === "up" && !thumbsUpClicked && thumbsUpHover) {
+      return unclickedHover;
+    }
+
+    if (type === "up" && thumbsUpClicked && !thumbsUpHover) {
+      return clicked;
+    }
+
+    if (type === "up" && thumbsUpClicked && thumbsUpHover) {
+      return clickedHover;
+    }
+
+    if (type === "down" && !thumbsDownClicked && !thumbsDownHover) {
+      return unclicked;
+    }
+
+    if (type === "down" && !thumbsDownClicked && thumbsDownHover) {
+      return unclickedHover;
+    }
+
+    if (type === "down" && thumbsDownClicked && !thumbsDownHover) {
+      return clicked;
+    }
+
+    if (type === "down" && thumbsDownClicked && thumbsDownHover) {
+      return clickedHover;
+    }
   };
 
   return (
@@ -31,12 +96,8 @@ const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
               <ThumbsUp
                 className='rating-svg'
                 width={20}
-                stroke={
-                  thumbsUpHover
-                    ? "rgba(29, 140, 248, 0.5)"
-                    : "rgba(29, 140, 248, 1)"
-                }
-              />{" "}
+                stroke={iconColor("up")}
+              />
               {likes}
             </div>
           </div>
@@ -50,11 +111,7 @@ const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
               <ThumbsDown
                 className='rating-svg'
                 width={20}
-                stroke={
-                  thumbsDownHover
-                    ? "rgba(29, 140, 248, 0.5)"
-                    : "rgba(29, 140, 248, 1)"
-                }
+                stroke={iconColor("down")}
               />{" "}
               {dislikes}
             </div>
