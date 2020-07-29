@@ -25,7 +25,7 @@ const MovieCard = ({
     ) {
       direction = "subtract";
     }
-    // toggle click state of clicked button
+    // toggle button click state
     if (type === "up") {
       setThumbsUpClicked(!thumbsUpClicked);
     }
@@ -34,6 +34,45 @@ const MovieCard = ({
     }
 
     rateMovie(type, direction, id);
+  };
+
+  const iconColor = (type) => {
+    const unclicked = "rgba(29, 140, 248, 1)";
+    const unclickedHover = "rgba(29, 140, 248, 0.5)";
+    const clicked = "rgba(250, 200, 10, 1)";
+    const clickedHover = "rgba(250, 200, 10, 0.5)";
+
+    if (type === "up" && !thumbsUpClicked && !thumbsUpHover) {
+      return unclicked;
+    }
+
+    if (type === "up" && !thumbsUpClicked && thumbsUpHover) {
+      return unclickedHover;
+    }
+
+    if (type === "up" && thumbsUpClicked && !thumbsUpHover) {
+      return clicked;
+    }
+
+    if (type === "up" && thumbsUpClicked && thumbsUpHover) {
+      return clickedHover;
+    }
+
+    if (type === "down" && !thumbsDownClicked && !thumbsDownHover) {
+      return unclicked;
+    }
+
+    if (type === "down" && !thumbsDownClicked && thumbsDownHover) {
+      return unclickedHover;
+    }
+
+    if (type === "down" && thumbsDownClicked && !thumbsDownHover) {
+      return clicked;
+    }
+
+    if (type === "down" && thumbsDownClicked && thumbsDownHover) {
+      return clickedHover;
+    }
   };
 
   return (
@@ -57,11 +96,7 @@ const MovieCard = ({
               <ThumbsUp
                 className='rating-svg'
                 width={20}
-                stroke={
-                  thumbsUpHover
-                    ? "rgba(29, 140, 248, 0.5)"
-                    : "rgba(29, 140, 248, 1)"
-                }
+                stroke={iconColor("up")}
               />
               {likes}
             </div>
@@ -76,11 +111,7 @@ const MovieCard = ({
               <ThumbsDown
                 className='rating-svg'
                 width={20}
-                stroke={
-                  thumbsDownHover
-                    ? "rgba(29, 140, 248, 0.5)"
-                    : "rgba(29, 140, 248, 1)"
-                }
+                stroke={iconColor("down")}
               />{" "}
               {dislikes}
             </div>
