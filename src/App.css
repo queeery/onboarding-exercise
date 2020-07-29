@@ -43,7 +43,7 @@
 }
 
 .main__heading {
-  font-size: calc(10px + 1rem);
+  font-size: 2rem;
   color: white;
   text-align: left;
   margin-left: 2vw;
@@ -55,26 +55,31 @@
   font-size: calc(15px + 1rem);
   color: white;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 8rem;
 }
 
 .MoviesContainer {
   width: 90%;
-  display: inline-grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  column-gap: 30px;
-  row-gap: 40px;
+  display: flex;
+  justify-content: center;
+  /* grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: auto; */
+  flex-wrap: wrap;
+  /* column-gap: 30px;
+  row-gap: 40px; */
 }
 
 .MovieCard {
-  width: 100%;
+  width: 20%;
+  grid: span 4;
   min-width: 250px;
   font-size: 1rem;
   transition: all 0.3s;
   position: relative;
   box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  margin: 1rem 1rem;
 }
 
 .MovieCard:hover {
