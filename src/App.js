@@ -49,6 +49,7 @@ function App() {
         .catch((err) => {
           // display UI err
           // throw err;
+          console.log(err);
         });
     };
     getMovies();
