@@ -61,6 +61,7 @@ function App() {
         <img src={logo} className='App-logo' alt='logo' />
         <form className='filter'>
           <input
+            placeholder='Filter by title'
             className='filter-input'
             type='text'
             value={filter}
