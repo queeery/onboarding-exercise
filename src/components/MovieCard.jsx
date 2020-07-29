@@ -2,12 +2,38 @@ import React, { useContext, useState } from "react";
 import ThumbsUp from "../static/media/thumbs-up";
 import ThumbsDown from "../static/media/thumbs-down";
 
-const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
+const MovieCard = ({
+  id,
+  title,
+  category,
+  url,
+  likes,
+  dislikes,
+  rateMovie,
+}) => {
   const [thumbsDownHover, setThumbsDownHover] = useState(false);
   const [thumbsUpHover, setThumbsUpHover] = useState(false);
+  const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
+  const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
 
   const handleRatingClick = (type, id) => {
-    console.log(type, id);
+    // detect if already button clicked to limit rating spam.
+    let direction = "add";
+    if (
+      (type === "up" && thumbsUpClicked) ||
+      (type === "down" && thumbsDownClicked)
+    ) {
+      direction = "subtract";
+    }
+    // toggle click state of clicked button
+    if (type === "up") {
+      setThumbsUpClicked(!thumbsUpClicked);
+    }
+    if (type === "down") {
+      setThumbsDownClicked(!thumbsDownClicked);
+    }
+
+    rateMovie(type, direction, id);
   };
 
   return (
@@ -36,7 +62,7 @@ const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
                     ? "rgba(29, 140, 248, 0.5)"
                     : "rgba(29, 140, 248, 1)"
                 }
-              />{" "}
+              />
               {likes}
             </div>
           </div>

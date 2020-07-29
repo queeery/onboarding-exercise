@@ -11,6 +11,35 @@ function App() {
   const [filter, setFilter] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  const handleFilterChange = ({ target: { value } }) => {
+    const lowercaseValue = value.toLowerCase();
+    setFilter(value);
+    const filtered = movies.filter(({ title }) => {
+      const cleanedTitle = title.toLowerCase();
+      return cleanedTitle.indexOf(lowercaseValue) !== -1;
+    });
+    setFilteredMovies(filtered);
+  };
+
+  function rateMovie(type, direction, uid) {
+    // find movie with id and update rating. Direction determined by whether button has already been clicked to stop rate spamming.
+
+    const updatedMovies = movies.map((movie) => {
+      if (uid === movie.id && direction === "add") {
+        type === "up" ? movie.likes++ : movie.dislikes++;
+        return movie;
+      }
+
+      if (uid === movie.id && direction === "subtract") {
+        type === "up" ? movie.likes-- : movie.dislikes--;
+        return movie;
+      }
+
+      return movie;
+    });
+    setMovies(updatedMovies);
+  }
+
   useEffect(() => {
     const getMovies = () => {
       movieData.movies$
@@ -19,22 +48,11 @@ function App() {
         })
         .catch((err) => {
           // display UI err
-          throw err;
+          // throw err;
         });
     };
     getMovies();
   }, []);
-
-  const handleFilterChange = ({ target: { value } }) => {
-    const lowercaseValue = value.toLowerCase();
-    setFilter(value);
-    const filtered = movies.filter(({ title }) => {
-      const cleanedTitle = title.toLowerCase();
-      return cleanedTitle.indexOf(lowercaseValue) !== -1;
-    });
-
-    setFilteredMovies(filtered);
-  };
 
   return (
     <div className='App'>
@@ -51,7 +69,10 @@ function App() {
       </header>
       <h1 className='main__heading'>Streaming Now</h1>
       <section className='main'>
-        <MoviesContainer movies={filter ? filteredMovies : movies} />
+        <MoviesContainer
+          rateMovie={rateMovie}
+          movies={filter ? filteredMovies : movies}
+        />
       </section>
     </div>
   );

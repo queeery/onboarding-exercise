@@ -1,11 +1,11 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MoviesContainer({ movies }) {
+function MoviesContainer({ movies, rateMovie }) {
   return (
     <section className='MoviesContainer'>
       {movies.map((movie) => (
-        <MovieCard key={movie.id} {...movie} />
+        <MovieCard rateMovie={rateMovie} key={movie.id} {...movie} />
       ))}
     </section>
   );
