@@ -8,6 +8,8 @@ import * as movieData from "./movies";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = () => {
@@ -23,14 +25,33 @@ function App() {
     getMovies();
   }, []);
 
+  const handleFilterChange = ({ target: { value } }) => {
+    const lowercaseValue = value.toLowerCase();
+    setFilter(value);
+    const filtered = movies.filter(({ title }) => {
+      const cleanedTitle = title.toLowerCase();
+      return cleanedTitle.indexOf(lowercaseValue) !== -1;
+    });
+
+    setFilteredMovies(filtered);
+  };
+
   return (
     <div className='App'>
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
+        <form className='filter'>
+          <input
+            className='filter-input'
+            type='text'
+            value={filter}
+            onChange={handleFilterChange}
+          />
+        </form>
       </header>
       <h1 className='main__heading'>Streaming Now</h1>
       <section className='main'>
-        <MoviesContainer movies={movies} />
+        <MoviesContainer movies={filter ? filteredMovies : movies} />
       </section>
     </div>
   );

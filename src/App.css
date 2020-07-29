@@ -20,7 +20,6 @@
 }
 
 .App-header {
-  background-color: #171941;
   min-height: 80px;
   display: flex;
   align-items: center;
@@ -31,6 +30,16 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.filter {
+  margin-right: 30px;
+}
+.filter-input {
+  border-radius: 3px;
+  height: 2rem;
+  padding: 0 5px;
+  font-size: 1rem;
 }
 
 .main__heading {
@@ -108,8 +117,8 @@
 
 .title {
   color: #fd5d93;
-  font-size: 1.1rem;
-  font-weight: normal;
+  font-size: 1.5rem;
+  font-weight: lighter;
   margin: 0;
   margin-bottom: 8px;
 }
@@ -119,6 +128,7 @@
   font-weight: lighter;
   margin: 0;
   color: #ff8d72;
+  justify-self: flex-start;
 }
 
 .rating-icon {
