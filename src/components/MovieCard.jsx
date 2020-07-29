@@ -33,15 +33,31 @@ const MovieCard = ({
       setThumbsDownClicked(!thumbsDownClicked);
     }
 
+    // case for changing rating when selection has already been made. Decrement other first before incrementing
+    if (type === "up" && thumbsDownClicked) {
+      rateMovie("down", "subtract", id);
+      rateMovie(type, direction, id);
+      setThumbsDownClicked(!thumbsDownClicked);
+      return;
+    }
+
+    if (type === "down" && thumbsUpClicked) {
+      rateMovie("up", "subtract", id);
+      rateMovie(type, direction, id);
+      setThumbsUpClicked(!thumbsUpClicked);
+      return;
+    }
+
     rateMovie(type, direction, id);
   };
 
   const iconColor = (type) => {
     const unclicked = "rgba(29, 140, 248, 1)";
-    const unclickedHover = "rgba(29, 140, 248, 0.5)";
+    const unclickedHover = "rgba(29, 140, 248, 0.8)";
     const clicked = "rgba(250, 200, 10, 1)";
-    const clickedHover = "rgba(250, 200, 10, 0.5)";
+    const clickedHover = "rgba(250, 200, 10, 0.8)";
 
+    // TODO refactor to switch
     if (type === "up" && !thumbsUpClicked && !thumbsUpHover) {
       return unclicked;
     }
