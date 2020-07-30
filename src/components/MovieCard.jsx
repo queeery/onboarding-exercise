@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ThumbsUp from "../static/media/thumbs-up";
 import ThumbsDown from "../static/media/thumbs-down";
 

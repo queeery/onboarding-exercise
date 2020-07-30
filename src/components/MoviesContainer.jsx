@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import MovieCard from "./MovieCard";
+import MovieContext from "../MoviesContext";
 
-function MoviesContainer({ movies, rateMovie }) {
+function MoviesContainer({ rateMovie }) {
+  const movies = useContext(MovieContext);
   return (
     <section className='MoviesContainer'>
       {movies.map((movie) => (
