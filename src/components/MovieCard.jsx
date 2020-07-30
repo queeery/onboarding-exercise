@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import MovieContext from "../MoviesContext";
+
 import ThumbsUp from "../static/media/thumbs-up";
 import ThumbsDown from "../static/media/thumbs-down";
 
-const MovieCard = ({
-  id,
-  title,
-  category,
-  url,
-  likes,
-  dislikes,
-  rateMovie,
-}) => {
+const MovieCard = ({ id, title, category, url, likes, dislikes }) => {
   const [thumbsDownHover, setThumbsDownHover] = useState(false);
   const [thumbsUpHover, setThumbsUpHover] = useState(false);
   const [thumbsUpClicked, setThumbsUpClicked] = useState(false);
   const [thumbsDownClicked, setThumbsDownClicked] = useState(false);
+
+  const { rateMovie } = useContext(MovieContext);
 
   const handleRatingClick = (type, id) => {
     // detect if already button clicked to limit rating spam.

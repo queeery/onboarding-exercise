@@ -57,7 +57,9 @@ function App() {
   }, []);
 
   return (
-    <MoviesContext.Provider value={movies}>
+    <MoviesContext.Provider
+      value={{ movies, filteredMovies, rateMovie, filter }}
+    >
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
