@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MoviesContext from "./MoviesContext";
 import logo from "./queeery-logo.png";
 import MoviesContainer from "../src/components/MoviesContainer";
 import "./App.css";
@@ -56,27 +57,31 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <form className='filter'>
-          <input
-            placeholder='Filter by title'
-            className='filter-input'
-            type='text'
-            value={filter}
-            onChange={handleFilterChange}
+    <MoviesContext.Provider
+      value={{ movies, filteredMovies, rateMovie, filter }}
+    >
+      <div className='App'>
+        <header className='App-header'>
+          <img src={logo} className='App-logo' alt='logo' />
+          <form className='filter'>
+            <input
+              placeholder='Filter by title'
+              className='filter-input'
+              type='text'
+              value={filter}
+              onChange={handleFilterChange}
+            />
+          </form>
+        </header>
+        <h1 className='main__heading'>Streaming Now</h1>
+        <section className='main'>
+          <MoviesContainer
+            rateMovie={rateMovie}
+            movies={filter ? filteredMovies : movies}
           />
-        </form>
-      </header>
-      <h1 className='main__heading'>Streaming Now</h1>
-      <section className='main'>
-        <MoviesContainer
-          rateMovie={rateMovie}
-          movies={filter ? filteredMovies : movies}
-        />
-      </section>
-    </div>
+        </section>
+      </div>
+    </MoviesContext.Provider>
   );
 }
 
