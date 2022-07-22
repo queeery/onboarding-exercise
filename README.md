@@ -32,7 +32,7 @@ In the project directory, you can run:
 
 ### `yarn install`
 
-To install packeges. 
+To install packages. 
 
 ### `yarn start`
 
